@@ -1,8 +1,8 @@
 (ns markdown-footnotes-sort.core
   (:gen-class)
-  (:require [markdown-footnotes-sort.sort :refer [mdsort]]
-            [clojure.tools.cli :refer [parse-opts]])
-  (:import java.io.File))
+  (:require [clojure.tools.cli :refer [parse-opts]]
+            [markdown-footnotes-sort.sort :refer [mdsort]]
+            [clojure.string :as string]))
 
 (set! *warn-on-reflection* true)
 
@@ -14,9 +14,7 @@
   (let [{:keys [options arguments summary errors]} (parse-opts args cli-options)]
     (cond
       ;; any errors occured while parsing CLI args
-      errors (print (str (clojure.string/join "\n" errors)
-                         "\n"
-                         summary))
+      errors (print (str (string/join "\n" errors) "\n" summary))
 
       ;; --help provided or no arguments provided at all (arguments, not options!)
       (or (empty? arguments)
@@ -26,7 +24,9 @@
                   sorted (-> filename slurp mdsort)]
               (if (:in-place options)
                 (spit filename sorted)
-                (println sorted))))))
+                (do
+                  (println sorted)
+                  sorted))))))
 
 (comment
   (-main "example.md")
