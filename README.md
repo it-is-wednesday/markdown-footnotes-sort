@@ -1,6 +1,6 @@
 # markdown-footnotes-sort
 
-A [babashka](https://github.com/babashka/babashka#installation) script to sort footnotes and their links in a Markdown document.
+A [babashka](https://babashka.org) script to sort footnotes and their links in a Markdown document.
 *The script replaces the file's content in-place!*
 
 For example, for the following input:
@@ -32,3 +32,8 @@ After [installing Babashka](https://github.com/babashka/babashka#installation):
 ```
 
 This will override the current file with its sorted version
+
+## Credit
+
+This is practically a clone of
+[derdennis/sort-markdown-footnotes](https://github.com/derdennis/sort-markdown-footnotes)
